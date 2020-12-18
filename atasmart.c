@@ -923,10 +923,10 @@ int sk_disk_smart_status(SkDisk *d, SkBool *good) {
         /* SAT/USB bridges truncate packets, so we only check for 4F,
          * not for 2C on those */
         if ((d->type == SK_DISK_TYPE_ATA_PASSTHROUGH_12 || cmd[3] == htons(0x00C2U)) &&
-            cmd[4] == htons(0x4F00U))
+            (cmd[4] & htons(0xFF00U)) == htons(0x4F00U))
                 *good = TRUE;
         else if ((d->type == SK_DISK_TYPE_ATA_PASSTHROUGH_12 || cmd[3] == htons(0x002CU)) &&
-                 cmd[4] == htons(0xF400U))
+                 (cmd[4] & htons(0xFF00U)) == htons(0xF400U))
                 *good = FALSE;
         else {
                 errno = EIO;
