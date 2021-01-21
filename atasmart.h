@@ -24,6 +24,7 @@
 ***/
 
 #include <inttypes.h>
+#include <stddef.h>
 
 /* Please note that all enums defined here may be extended at any time
  * without this being considered an ABI change. So take care when
